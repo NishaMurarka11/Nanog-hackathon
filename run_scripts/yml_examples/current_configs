@@ -1,0 +1,208 @@
+{
+    "ceos1_config": {
+    "header": [
+        "! device: ceos1 (cEOSLab, EOS-4.28.3M-28837868.4283M (engineering build))\n!\n"
+    ],
+    "comments": [],
+    "cmds": {
+        "management api netconf": {
+            "comments": [],
+            "cmds": {
+                "transport ssh default": {
+                    "comments": [],
+                    "cmds": {}
+                }
+            }
+        },
+        "management api gnmi": {
+            "comments": [],
+            "cmds": {
+                "transport grpc default": {
+                    "comments": [],
+                    "cmds": {}
+                }
+            }
+        },
+        "router bgp 65000": {
+            "comments": [],
+            "cmds": {
+                "neighbor 10.10.0.1 maximum-routes 12000": null,
+                "address-family ipv4": {
+                    "comments": [],
+                    "cmds": {
+                        "neighbor 10.10.0.1 activate": null,
+                        "neighbor 10.10.1.1 activate": null
+                    }
+                },
+                "neighbor 10.10.1.1 maximum-routes 12000": null,
+                "neighbor 10.10.0.1 remote-as 65003": null,
+                "neighbor 2001:db8:10:10:1::1 remote-as 65001": null,
+                "neighbor 2001:db8:10:10::1 remote-as 65003": null,
+                "redistribute connected": null,
+                "neighbor 10.10.1.1 remote-as 65001": null,
+                "address-family ipv6": {
+                    "comments": [],
+                    "cmds": {
+                        "neighbor 2001:db8:10:10::1 activate": null,
+                        "neighbor 2001:db8:10:10:1::1 activate": null
+                    }
+                }
+            }
+        },
+        "interface Loopback0": {
+            "comments": [],
+            "cmds": {
+                "ipv6 address 2001:db8:0:1::/128": null,
+                "ip address 192.168.0.0/32": null
+            }
+        },
+        "username admin privilege 15 role network-admin secret sha512 $6$Z98W49v6O15ZKGW2$DlAQUoSHjUe3gphPllQhF8TUkwTNGfewwXZTaSi9h5HrKi3k0CQx8GRSpyQ3twfpd5htv05f2ZPSjnPmysT//1": null,
+        "transceiver qsfp default-mode 4x10G": null,
+        "service routing protocols model multi-agent": null,
+        "interface Ethernet1": {
+            "comments": [],
+            "cmds": {
+                "ipv6 address 2001:db8:10:10::/127": null,
+                "no switchport": null,
+                "description ceos2:Ethernet1": null,
+                "ip address 10.10.0.0/31": null
+            }
+        },
+        "ipv6 unicast-routing": null,
+        "management api http-commands": {
+            "comments": [],
+            "cmds": {
+                "protocol http": null,
+                "no shutdown": null
+            }
+        },
+        "interface Ethernet2": {
+            "comments": [],
+            "cmds": {
+                "no switchport": null,
+                "ipv6 address 2001:db8:10:10:1::/127": null,
+                "description srl1:ethernet-1/1": null,
+                "ip address 10.10.1.0/31": null
+            }
+        },
+        "ip routing": null,
+        "interface Management0": {
+            "comments": [],
+            "cmds": {
+                "ip address 172.22.0.2/24": null
+            }
+        },
+        "spanning-tree mode mstp": null,
+        "hostname ceos1": null,
+        "no aaa root": null
+    }
+},
+"ceos2_config":
+{
+    "header": [
+        "! device: ceos2 (cEOSLab, EOS-4.28.3M-28837868.4283M (engineering build))\n!\n"
+    ],
+    "comments": [],
+    "cmds": {
+        "management api netconf": {
+            "comments": [],
+            "cmds": {
+                "transport ssh default": {
+                    "comments": [],
+                    "cmds": {}
+                }
+            }
+        },
+        "management api gnmi": {
+            "comments": [],
+            "cmds": {
+                "transport grpc default": {
+                    "comments": [],
+                    "cmds": {}
+                }
+            }
+        },
+        "interface Loopback0": {
+            "comments": [],
+            "cmds": {
+                "ipv6 address 2001:db8:0:1::3/128": null,
+                "ip address 192.168.0.3/32": null
+            }
+        },
+        "router bgp 65003": {
+            "comments": [],
+            "cmds": {
+                "neighbor 2001:db8:10:10:: remote-as 65000": null,
+                "address-family ipv4": {
+                    "comments": [],
+                    "cmds": {
+                        "neighbor 10.10.0.1 activate": null,
+                        "neighbor 10.10.3.0 activate": null
+                    }
+                },
+                "address-family ipv6": {
+                    "comments": [],
+                    "cmds": {
+                        "neighbor 2001:db8:10:10:: activate": null,
+                        "neighbor 2001:db8:10:10:3:: activate": null
+                    }
+                },
+                "redistribute connected": null,
+                "neighbor 10.10.3.0 maximum-routes 12000": null,
+                "neighbor 10.10.0.0 maximum-routes 12000": null,
+                "neighbor 2001:db8:10:10:3:: remote-as 65002": null,
+                "neighbor 10.10.0.0 remote-as 65000": null,
+                "neighbor 10.10.3.0 remote-as 65002": null
+            }
+        },
+        "ipv6 unicast-routing": null,
+        "transceiver qsfp default-mode 4x10G": null,
+        "interface Ethernet3": {
+            "comments": [],
+            "cmds": {
+                "no switchport": null,
+                "description centos2:eth1": null,
+                "ipv6 address 2001:db8:10:101::1/64": null,
+                "ip address 10.100.1.1/24": null
+            }
+        },
+        "service routing protocols model multi-agent": null,
+        "interface Ethernet1": {
+            "comments": [],
+            "cmds": {
+                "ip address 10.10.0.1/31": null,
+                "no switchport": null,
+                "description ceos1:Ethernet1": null,
+                "ipv6 address 2001:db8:10:10::1/127": null
+            }
+        },
+        "username admin privilege 15 role network-admin secret sha512 $6$Z98W49v6O15ZKGW2$DlAQUoSHjUe3gphPllQhF8TUkwTNGfewwXZTaSi9h5HrKi3k0CQx8GRSpyQ3twfpd5htv05f2ZPSjnPmysT//1": null,
+        "management api http-commands": {
+            "comments": [],
+            "cmds": {
+                "protocol http": null,
+                "no shutdown": null
+            }
+        },
+        "interface Ethernet2": {
+            "comments": [],
+            "cmds": {
+                "ip address 10.10.3.1/31": null,
+                "no switchport": null,
+                "description srl2:ethernet-1/1": null,
+                "ipv6 address 2001:db8:10:10:3::1/127": null
+            }
+        },
+        "ip routing": null,
+        "interface Management0": {
+            "comments": [],
+            "cmds": {
+                "ip address 172.22.0.3/24": null
+            }
+        },
+        "spanning-tree mode mstp": null,
+        "hostname ceos2": null,
+        "no aaa root": null
+    }
+}
+}

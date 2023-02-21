@@ -1,0 +1,17 @@
+### device.yml
+- name: CEOS1
+  site: CUB
+  type: CEOS1
+  role: Router
+- name: CEOS2
+  site: CUB
+  type: CEOS2
+  role: Router
+- name: CRPD1
+  site: CUB
+  type: CRPD1
+  role: Router
+- name: CRPD2
+  site: CUB
+  type: CRPD2
+  role: Router

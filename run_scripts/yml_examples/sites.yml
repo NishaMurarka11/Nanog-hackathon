@@ -1,0 +1,4 @@
+### sites.yml
+- name: CUB
+  description: CU boulder sites
+  physical_address: "3100 Marine St., Boulder, CO 80303"
