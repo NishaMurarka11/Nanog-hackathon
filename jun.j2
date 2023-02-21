@@ -1,0 +1,206 @@
+{
+    "configuration": {
+        "@": {
+            "junos:changed-localtime": "2023-02-12 01:38:43 UTC",
+            "junos:changed-seconds": "1676165923"
+        },
+        "interfaces": {
+            "interface": [
+                {
+                    "name": "eth1",
+                    "unit": [
+                        {
+                            "family": {
+                                "inet": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth1ip}}"
+                                        }
+                                    ]
+                                },
+                                "inet6": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth1ip_inet6}}"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "eth2",
+                    "unit": [
+                        {
+                            "family": {
+                                "inet": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth2ip}}"
+                                        }
+                                    ]
+                                },
+                                "inet6": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth2ip_inet6}}"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "eth3",
+                    "unit": [
+                        {
+                            "family": {
+                                "inet": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth3ip}}"
+                                        }
+                                    ]
+                                },
+                                "inet6": {
+                                    "address": [
+                                        {
+                                            "name": "{{eth3ip_inet6}}"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "lo",
+                    "unit": [
+                        {
+                            "family": {
+                                "inet": {
+                                    "address": [
+                                        {
+                                            "name": "{{lo}}"
+                                        }
+                                    ]
+                                },
+                                "inet6": {
+                                    "address": [
+                                        {
+                                            "name": "{{lo_inet6}}"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        "policy-options": {
+            "policy-statement": [
+                {
+                    "name": "BGP_OUT",
+                    "term": [
+                        {
+                            "from": {
+                                "protocol": [
+                                    "direct"
+                                ]
+                            },
+                            "name": "REDIST",
+                            "then": {
+                                "accept": [
+                                    null
+                                ]
+                            }
+                        },
+                        {
+                            "from": {
+                                "protocol": [
+                                    "{{protocol}}"
+                                ]
+                            },
+                            "name": "BGP",
+                            "then": {
+                                "accept": [
+                                    null
+                                ]
+                            }
+                        }
+                    ],
+                    "then": {
+                        "reject": [
+                            null
+                        ]
+                    }
+                }
+            ]
+        },
+        "protocols": {
+            "bgp": {
+                "group": [
+                    {
+                        "export": [
+                            "BGP_OUT"
+                        ],
+                        "name": "V4",
+                        "neighbor": [
+                            {
+                                "name": "{{bgp_ne1}}",
+                                "peer-as": "{{bgp_ne1_as}}"
+                            },
+                            {
+                                "name": "{{bgp_ne2}}",
+                                "peer-as": "{{bgp_ne2_as}}"
+                            }
+                        ]
+                    },
+                    {
+                        "export": [
+                            "BGP_OUT"
+                        ],
+                        "name": "V6",
+                        "neighbor": [
+                            {
+                                "name": "{{bgp_ne1_ipv6}}",
+                                "peer-as": "{{bgp_ne1_as}}"
+                            },
+                            {
+                                "name": "{{bgp_ne2_ipv6}}",
+                                "peer-as": "{{bgp_ne2_as}}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "routing-options": {
+            "autonomous-system": {
+                "as-number": "65001"
+            }
+        },
+        "system": {
+            "license": {
+                "keys": {
+                    "key": [
+                        {
+                            "name": "20 244 Ni LONG NORMAL STANDALONE AGGR 1_KEYS INFINITE_KEYS 20 MAY 2022 0 0 20 MAY 2023 0 0 NiL SLM_CODE DEMO NiL NiL Ni NiL NiL 15_MINS NiL 0 jdyCslj4R4bP5ld5+Wgk2K/66cNOfKymmVrzqNRP60zRSqo/9ypAsYJI3n1XfR2XPpr99m+fUikVttS8YqJ9J/FhicobWfIObR9U4Ny/XZOtl7kcugffeOsGsMcA9ub4nfiqEcQWiUMl13VmH3lQD0lfmyy0rcW+F8DRfSyljah8M2WpA0ESkana5PpVyBIWgFgWzWkRFvducFRgvyklTxYKXhV6Th1eMTFw+qbAGCs6E6MHEMHZKe7vbBXv4LKzCUKH5NunArTaDLzyby9WqeRzg0V2nBvvX75MZo3DhUbI1fDw9vSIwq7CmfE0usfXjJBXMQDZ+gJNV9OVrWGaGX0WPueiaagueBbuu4i1I5uT2xNAsp6/ffRchrwG3s67mlVxn5cZaRWxC9GdtD6B+4M4XO+yYK0pQz2XoQ8JEqyudpLVi2kdgUhBjJ4Uw/WFdWfEyaNT7ifxNC331ElaHbTAACuj3qu2lyVluLq6v9KF5TJgIiZ9ZPuj3w06CckHN7318Z3rJrUvydkUkZsEO09YsqcHqGzKCao0BaRPzKsTnv4Dd+YzxS2yd0Yhp930CFHndWqPuNulHBq3FdxFTwUEUkNCMguDCQUEUkNCMgYBAQcBAQQlOGIxYjZmMWQtMzc2OS00ZjRlLWIzODctMzRlMzJlZTk2M2JkAAgBAQlApcnSKVGYup/I8yCzq1T2oOfVzQwIs6WHJOvIHOLi30SE8xpnUEyn2vVNSvARo83219EuMAg2YZuJYeeXn6S11QqCDjCCAQoCggEBANjjIBEkIdX8+C412dEpg7KzxidnAec1OAj7EJkI9BY541GHxeNZwxjujuJqSJ8uVk8xSWEqete9faGcgxFbCWGcJ6itzc8rMDQVY9wqkh8dx6SgrtZ6gDdbAu/YW8Wty7G7xmtudto7TM4a3exdzHcnBnsGtjtOtK6wc/Wa6MYq6h+mceI5sxUSW4GV+1FDibMFt2+XEypTsl/2GJda0CKGmfn9WLRGiER0PI/Y/F5/xuAE9V40BTh/WH6N/TzxERq9bAhjiJSqWFmSYT+i9x6iDBdtrbAFiS1ZDiDwriPz2aZOVTJmGaBdyjHaOZEnwE4KLVurn4akjUm4Uep7u4sCAwEAAQQlOGIxYjZmMWQtMzc2OS00ZjRlLWIzODctMzRlMzJlZTk2M2JkAAcBAQyCAI/9Bl0UhuEWYHM4qnZjbhgKxSbM1wNNb8bhk1EtXVI3X9DygbdK6f/di9EqDj3E0/3rlXWhSSAnnKiYeYqjAQBLSwMNnwnlR1kkDkHco93XLYSoQVPZK4cm3fTEPumbItU1EXjiqi4k7rpu6eiA8lR6iCEgHxIaBO49gOOOptSXyTjdPC7oxK5u3Nn/TxWCNBTG46HAU7qLR9oKmnpkTxnamrGBD9mj6znY/20HhhK8PmNllC65D2MULIiw8E83JxHMw5pkR6tIQ7wnQgLNmyfKtAhXszV1iUUhwaneGUVr34PEwgsihaxUiqi5R/kgIM6lvg9DY3+5Kr/O4Ylc/0MAAAK/#KeyType=DemoLab#AID=a977d6d8-a1c6-4153-8578-cc9dd8074769 SIGN=07280BE6F8AB640A5A04B62E97A144FEC5683DEBDA18E0831AFE59A340AF13921CF3A4A8059F61E0FAEA"
+                        }
+                    ]
+                }
+            },
+            "root-authentication": {
+                "encrypted-password": "$6$lB5c6$Zeud8c6IhCTE6hnZxXBl3ZMZTC2hOx9pxxYUWTHKW1oC32SATWLMH2EXarxWS5k685qMggUfFur1lq.o4p4cg1"
+            }
+        },
+        "version": "20220304.042022_builder.r1243823"
+    }
+}
